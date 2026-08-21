@@ -1,6 +1,6 @@
 ---
 name: adaptive-research-intelligence
-description: Research, find, discover, compare, or map unfamiliar subjects by decomposing the target, searching in learning batches, harvesting new terminology and graph edges from every useful result, and verifying candidates at their native source. Use for broad or deep research, similar resources or repositories, alternatives, potential customers from company lists, prior art, and existing libraries or frameworks that could replace custom code—especially when the user or model may not know the decisive names or vocabulary yet.
+description: Research, find, discover, compare, or map unfamiliar subjects by decomposing the target into functional primitives, searching in adaptive learning batches, harvesting new terminology and graph edges from useful results, and verifying candidates at their native source. Use for broad or deep research, similar resources or repositories, alternatives, potential customers from company lists, prior art, and existing libraries or frameworks that could replace custom code—especially when the user or model may not know the decisive names, vocabulary, code signatures, or standards yet.
 ---
 
 # Adaptive Research Intelligence
@@ -51,7 +51,9 @@ Describe the target from several independent surfaces. Use only the surfaces tha
 | Evidence | official page, code, release, filing, job post, case study, live behavior |
 | Exclusions | neighboring entities that look similar but do not satisfy the goal |
 
-Turn the model into semantic atoms: exact names, aliases, abbreviations, translations, legacy names, current jargon, user-language phrases, behaviors, data shapes, protocols, error strings, job titles, standards, dependencies, and related entities.
+Perform semantic inversion before searching: restate the target as technology- or vendor-agnostic functional primitives. For each important component, capture what it consumes, what transformation or decision it performs, what it emits, its state and invariants, and its integration boundary. Separate these from hardcoded burdens, reinvented wheels, and boilerplate that an established component may already solve.
+
+Turn the model into semantic atoms: exact names, aliases, abbreviations, translations, legacy names, current jargon, user-language phrases, behaviors, data shapes, protocols and RFCs, algorithms, error strings, job titles, standards, dependencies, symbols, imports, configuration keys, schemas, and related entities.
 
 ### Phase 2 — Build the query frontier
 
@@ -64,6 +66,7 @@ Generate candidate queries across different angles rather than paraphrasing one 
 | Structural | same data or workflow shape | `[entity relationship] system`, `[input] to [output] pipeline` |
 | Ecosystem | follow dependencies and neighbors | `[tool] plugin`, `[standard] implementation`, `used by [entity]` |
 | Artifact | target the source type | `site:github.com`, docs, API, paper, filing, job, case study |
+| Fingerprint | locate exact implementation traces | function or class signature, import path, AST node, manifest, schema, config key, protocol constant |
 | Alternative | reveal category language | `[known item] alternative`, `versus`, `migration from`, `replacement` |
 | Lateral | same mechanism in another domain | `[structural analogue] open source`, `[pattern] reference architecture` |
 | Temporal | separate current from historical | current year/month, changelog, release, archived, deprecated |
@@ -84,7 +87,7 @@ Run small enough batches that results can improve the next batch:
 4. **Adversarial batch** — search for counter-evidence, failure modes, stale status, exclusions, and competing explanations.
 5. **Closure batch** — target only unresolved high-impact gaps and confirm the top-ranked candidates at native sources.
 
-Parallelize independent source families when useful, but keep dependent rounds sequential so new vocabulary changes later queries.
+Parallelize independent source families when useful, but keep dependent rounds sequential so new vocabulary changes later queries. A hop is earned by new information: do not force a fixed number of rounds, and do not stop after an arbitrary count when decisive branches remain unresolved.
 
 After every useful result, harvest:
 
@@ -174,7 +177,8 @@ gh repo view owner/repo --json nameWithOwner,url,description,licenseInfo,stargaz
 3. Harvest each company's own language for the problem, initiative, buyer role, timing, and alternatives already in use.
 4. Score `fit`, `evidence of need`, `timing`, `buyer/reachability`, and `source confidence`; keep absent evidence separate from negative evidence.
 5. Bind every row to the exact company entity and current source. Deduplicate subsidiaries, brands, domains, and similarly named companies carefully.
-6. Return a ranked, evidence-backed target list. Do not invent contact data or send outreach without matching authority.
+6. Include positive trigger signals and disqualifiers: active hiring, launches, migrations, incidents, compliance deadlines, integrations, procurement clues, demonstrated pain, existing vendor lock-in, lack of fit, and stale timing.
+7. Return a ranked, evidence-backed target list with the buyer-role hypothesis and a source-bound relevance angle. Do not invent contact data or send outreach without matching authority.
 
 ### Replace hardcoded code with an existing framework or component
 
@@ -183,6 +187,20 @@ gh repo view owner/repo --json nameWithOwner,url,description,licenseInfo,stargaz
 3. Search package registries, official framework ecosystems, GitHub repositories and code, reference implementations, and maintained standards.
 4. Compare `keep`, `configure`, `adapt`, `extract`, `replace`, and `replatform` against compatibility, license, security, migration cost, operational burden, and test coverage.
 5. Prefer the smallest complete adoption. Verify with a focused spike, then implement only when requested and run the real acceptance checks.
+
+When no single candidate covers the target, produce a bounded fusion plan rather than a collage:
+
+```text
+FOUNDATION: the smallest candidate that owns the main architecture
+EXTRACTIONS: independently adoptable components, packages, or patterns
+GLUE: interfaces, adapters, schema changes, and migration work still required
+BURDENS REMOVED: custom code or operations eliminated by the adoption
+RISKS: license, security, maintenance, compatibility, and integration hazards
+EFFORT: evidence-based ranges, with assumptions; never fabricated precision
+REUSE DECISION: adopt | adapt | extract | reference | keep custom
+```
+
+Prefer one coherent foundation and the fewest compatible extractions. A popular repository is not a foundation unless its relevant path and operating assumptions were verified.
 
 ### Unfamiliar landscape or unknown terminology
 
@@ -219,5 +237,7 @@ Before claiming completion, verify:
 - the strongest leads were opened and checked at native sources;
 - candidates were deduplicated and exact entities were resolved;
 - contradictions, stale evidence, provider limits, and unknowns are visible where material;
+- a credible runner-up or counterfactual was considered when making a consequential selection, including whether keeping or building custom is actually safer or simpler;
+- lateral or creative searches produced a real lead, query, or disconfirming insight rather than decorative analogies;
 - the stopping rule was actually met;
 - any requested action or implementation exists and was verified at the promised layer.
