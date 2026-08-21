@@ -1,0 +1,4 @@
+interface:
+  display_name: "Adaptive Research Intelligence"
+  short_description: "Learn the vocabulary, expand the search, and verify the best candidates"
+  default_prompt: "Use $adaptive-research-intelligence to research this request as an adaptive discovery loop. Preserve the exact goal and constraints, decompose the target into functional and structural search surfaces, search in small learning batches, harvest new terminology and graph edges from useful results, expand the highest-information branches, verify finalists at native sources, stop only on evidence saturation, and deliver or execute the requested outcome. Keep discovered, verified, selected, implemented, and proven states distinct."
